@@ -11,7 +11,6 @@
   <meta property="og:description" content="Guidance for buying & selling in Vancouver and Surrey. Book a call or request a free home value estimate." />
   <meta property="og:type" content="website" />
 
-  <!-- Minimal, modern styling (no external dependencies) -->
   <style>
     :root {
       --bg: #0b0f14;
@@ -46,7 +45,6 @@
 
     .container { max-width: var(--max); margin: 0 auto; padding: 0 18px; }
 
-    /* Header */
     .header {
       position: sticky;
       top: 0;
@@ -68,17 +66,6 @@
       gap: 10px;
       font-weight: 700;
       letter-spacing: .2px;
-    }
-    .badge {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(34,197,94,.25), rgba(96,165,250,.25));
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      font-weight: 800;
     }
     .navlinks {
       display: none;
@@ -135,7 +122,6 @@
       cursor: pointer;
     }
 
-    /* Mobile menu */
     .mobile {
       display: none;
       padding: 0 0 14px 0;
@@ -151,7 +137,6 @@
     }
     .mobile a:hover { background: rgba(255,255,255,.06); color: var(--text); border-color: rgba(255,255,255,.10); }
 
-    /* Hero */
     .hero { padding: 44px 0 26px; }
     .heroGrid {
       display: grid;
@@ -222,7 +207,6 @@
     .mini h3 { margin: 0; font-size: 14px; }
     .mini p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 
-    /* Lead card */
     .heroRight { padding: 22px; }
     .leadHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .leadHeader h2 { margin: 0; font-size: 18px; letter-spacing: -0.2px; }
@@ -290,7 +274,6 @@
       font-size: 13px;
     }
 
-    /* Sections */
     section { padding: 26px 0; }
     .sectionTitle {
       display: flex;
@@ -333,7 +316,6 @@
     summary { cursor: pointer; font-weight: 800; }
     details p { margin: 10px 0 0; color: var(--muted); font-weight: 600; }
 
-    /* Footer */
     footer {
       padding: 22px 0 30px;
       border-top: 1px solid var(--line);
@@ -342,7 +324,6 @@
     .footGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
     .footSmall { font-size: 12px; line-height: 1.6; }
 
-    /* Responsive */
     @media (min-width: 880px) {
       .navlinks { display: flex; }
       .hamburger { display: none; }
@@ -354,9 +335,7 @@
       .footGrid { grid-template-columns: 1.2fr .8fr; align-items: start; }
     }
 
-    /* Utility */
     .muted { color: var(--muted); }
-    .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
   </style>
 </head>
 
@@ -365,7 +344,8 @@
     <div class="container">
       <div class="nav" aria-label="Primary">
         <a class="brand" href="#top" aria-label="Home">
-          <img src="data:image/jpeg;base64,939108" alt="Headshot" style="width:72px;height:72px;border-radius:80%;object-fit:cover;border:1px solid rgba(255,255,255,.25);" />
+          <img src="headshot.jpg" alt="Chandan Rathod headshot"
+               style="width:72px;height:72px;border-radius:80%;object-fit:cover;border:2px solid rgba(255,255,255,.25);" />
           <div>
             <div style="font-size:14px; line-height:1.15;">Chandan Rathod</div>
             <div style="font-size:12px; color: var(--muted); font-weight:700;">Vancouver • Surrey Realtor</div>
@@ -379,7 +359,7 @@
           <a href="#sellers">Sell</a>
           <a href="#testimonials">Reviews</a>
           <a href="#faq">FAQ</a>
-          <a href="#faq">Blog</a>
+          <a href="/blog/">Blog</a>
           <a href="#contact">Contact</a>
         </nav>
 
@@ -399,7 +379,7 @@
         <a href="#sellers">Sell</a>
         <a href="#testimonials">Reviews</a>
         <a href="#faq">FAQ</a>
-        <a href="#faq">Blog</a>
+        <a href="/blog/">Blog</a>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -441,7 +421,8 @@
 
           <aside class="card heroRight" id="contact">
             <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-              <img src="headshot.jpg" alt="Chandan Rathod – Realtor" style="width:120px;height:120px;border-radius:80%;object-fit:cover;border:2px solid rgba(255,255,255,.25);" />
+              <img src="headshot.jpg" alt="Chandan Rathod – Realtor"
+                   style="width:140px;height:140px;border-radius:80%;object-fit:cover;border:2px solid rgba(255,255,255,.25);" />
               <div>
                 <div style="font-weight:900;font-size:16px;">Chandan Rathod</div>
                 <div class="muted" style="font-weight:700;font-size:13px;">Sutton Realtor · Vancouver & Surrey</div>
@@ -458,9 +439,6 @@
               <div class="tab" id="tab-value" role="tab" aria-selected="false" tabindex="0">🏠 Home Value</div>
             </div>
 
-            <!-- NOTE: This form is currently set up for a no-backend demo.
-                 Replace action with Formspree / your CRM endpoint (examples below in comments).
-            -->
             <form id="leadForm" novalidate>
               <input type="hidden" name="leadType" id="leadType" value="call" />
 
@@ -545,17 +523,7 @@
               </div>
 
               <p class="fineprint">By submitting, you agree I may contact you about your request. No spam. <a href="#disclaimer">View disclaimer</a>.</p>
-              <div class="success" id="successMsg">✅ Got it — I’ll reach out shortly. (Demo mode: this form doesn’t send yet. See the setup note below.)</div>
-
-              <!--
-                QUICK SETUP (recommended)
-                1) Formspree: create a form and replace the JS below to POST to your endpoint.
-                   Example endpoint: https://formspree.io/f/xxxxabcd
-
-                2) CRM: replace fetch() URL with your CRM webhook (Follow Up Boss, LionDesk, HubSpot, etc.)
-
-                3) EmailJS (client-side email): works without a server but requires EmailJS setup.
-              -->
+              <div class="success" id="successMsg">✅ Got it — I’ll reach out shortly. (Demo mode: this form doesn’t send yet.)</div>
             </form>
           </aside>
         </div>
@@ -760,25 +728,28 @@
       </div>
     </section>
 
-    <!-- BLOG -->
-<section id="blog">
-  <div class="container">
-    <div class="sectionTitle">
-      <div>
-        <h2>Blog</h2>
-        <p>Weekly real estate updates, tips, and guides.</p>
-      </div>
-    </div>
+    <!-- BLOG PREVIEW (pulls from blog.json) -->
+    <section id="blogPreview">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>Latest from the blog</h2>
+            <p>Weekly real estate updates, tips, and guides for Vancouver & Surrey.</p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="/blog/">View all posts →</a>
+            <a class="btn ghost" href="/admin/">Admin login</a>
+          </div>
+        </div>
 
-    <div class="grid3" id="blogGrid"></div>
-
-    <div class="card" style="padding:16px; margin-top:12px;">
-      <div class="muted" style="font-weight:650; font-size:13px;">
-        To add a new post: open <b>index.html</b> → search for <b>posts =</b> → add a new item at the top → save → upload to Netlify.
+        <div class="grid3" id="blogGrid">
+          <div class="card tile">
+            <h3>Loading posts…</h3>
+            <p class="muted">If this stays, your blog page still needs the fetch fix.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- CONTACT STRIP -->
     <section aria-label="Contact strip">
@@ -826,7 +797,8 @@
       <div class="footGrid">
         <div>
           <div style="display:flex; align-items:center; gap:10px;">
-            <img src="data:image/jpeg;base64,{{B64}}" alt="Headshot" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.25);" />
+            <img src="headshot.jpg" alt="Chandan Rathod headshot"
+                 style="width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.25);" />
             <div>
               <div style="font-weight:900;">Chandan Rathod</div>
               <div class="footSmall">Vancouver • Surrey • Lower Mainland</div>
@@ -845,57 +817,16 @@
             <a href="#services" style="text-decoration:underline; text-underline-offset:2px;">Services</a> ·
             <a href="#buyers" style="text-decoration:underline; text-underline-offset:2px;">Buy</a> ·
             <a href="#sellers" style="text-decoration:underline; text-underline-offset:2px;">Sell</a> ·
-            <a href="#contact" style="text-decoration:underline; text-underline-offset:2px;">Contact</a>
-          </p>
-          <p class="footSmall" style="margin-top:10px;">
-            Social: <a href="#" style="text-decoration:underline; text-underline-offset:2px;">Instagram</a> ·
-            <a href="#" style="text-decoration:underline; text-underline-offset:2px;">YouTube</a> ·
-            <a href="#" style="text-decoration:underline; text-underline-offset:2px;">LinkedIn</a>
+            <a href="#contact" style="text-decoration:underline; text-underline-offset:2px;">Contact</a> ·
+            <a href="/blog/" style="text-decoration:underline; text-underline-offset:2px;">Blog</a>
           </p>
         </div>
       </div>
     </div>
   </footer>
 
-// BLOG POSTS (add a new post weekly by adding an item at the TOP)
-const posts = [
-  {
-    title: "Market Update: What’s happening in Vancouver & Surrey this week",
-    date: "Feb 2026",
-    excerpt: "A quick snapshot of pricing, demand, and what it means if you’re buying or selling.",
-    content: "Write your full blog post here. You can use plain text. Keep paragraphs short for readability."
-  },
-  {
-    title: "Buyer Tip: 5 things to check before writing an offer",
-    date: "Feb 2026",
-    excerpt: "The small details that save money and avoid headaches later.",
-    content: "Write your full blog post here..."
-  }
-];
-
-function renderBlog() {
-  const grid = document.getElementById('blogGrid');
-  if (!grid) return;
-
-  grid.innerHTML = posts.map((p, i) => `
-    <div class="card tile" style="cursor:pointer;" onclick="openPost(${i})">
-      <h3>${p.title}</h3>
-      <p class="muted" style="margin-top:6px;"><strong>${p.date}</strong></p>
-      <p style="margin-top:8px;" class="muted">${p.excerpt}</p>
-      <p class="muted" style="margin-top:10px; font-weight:800;">Read more →</p>
-    </div>
-  `).join('');
-}
-
-function openPost(i) {
-  const p = posts[i];
-  alert(p.title + "\\n\\n" + p.content);
-}
-
-renderBlog();
-
   <script>
-    // Mobile menu
+    // ========= Mobile menu =========
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if (menuBtn) {
@@ -904,13 +835,12 @@ renderBlog();
         menuBtn.setAttribute('aria-expanded', String(isOpen));
       });
     }
-    // Close mobile menu after clicking a link
     mobileMenu?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', () => {
       mobileMenu.classList.remove('open');
       menuBtn?.setAttribute('aria-expanded', 'false');
     }));
 
-    // Tabs: Call vs Home Value
+    // ========= Tabs: Call vs Home Value =========
     const tabCall = document.getElementById('tab-call');
     const tabValue = document.getElementById('tab-value');
     const callFields = document.getElementById('callFields');
@@ -927,15 +857,13 @@ renderBlog();
       valueFields.style.display = isCall ? 'none' : '';
       leadType.value = which;
     }
-
     window.__setLeadTab = setTab;
-
     tabCall?.addEventListener('click', () => setTab('call'));
     tabValue?.addEventListener('click', () => setTab('value'));
     tabCall?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('call'); });
     tabValue?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('value'); });
 
-    // Demo form submission (no backend). Replace with fetch() to Formspree/CRM.
+    // ========= Demo form submission =========
     const form = document.getElementById('leadForm');
     const successMsg = document.getElementById('successMsg');
 
@@ -945,7 +873,6 @@ renderBlog();
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
-
       const data = new FormData(form);
       const name = String(data.get('name') || '').trim();
       const phone = String(data.get('phone') || '').trim();
@@ -956,31 +883,64 @@ renderBlog();
         return;
       }
 
-      // ✅ OPTION 1: Formspree (uncomment and replace URL)
-      // try {
-      //   const res = await fetch('https://formspree.io/f/xxxxabcd', {
-      //     method: 'POST',
-      //     body: data,
-      //     headers: { 'Accept': 'application/json' }
-      //   });
-      //   if (!res.ok) throw new Error('Form submit failed');
-      // } catch (err) {
-      //   alert('Sorry — something went wrong. Please email instead.');
-      //   return;
-      // }
-
-      // ✅ OPTION 2: CRM webhook (example)
-      // await fetch('https://your-crm-webhook-url', { method:'POST', body: JSON.stringify(Object.fromEntries(data)), headers:{'Content-Type':'application/json'} });
-
-      // Demo success
       successMsg.style.display = 'block';
       form.reset();
-      // Keep tab state
       setTab(leadType.value || 'call');
     });
 
+    // ========= Blog preview (homepage) =========
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+    }
+
+    async function loadBlogPreview() {
+      const grid = document.getElementById('blogGrid');
+      if (!grid) return;
+
+      try {
+        const url = new URL('/blog.json', window.location.origin).toString();
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error('blog.json fetch failed: ' + res.status);
+        const data = await res.json();
+
+        const posts = Array.isArray(data?.posts) ? data.posts : [];
+        if (!posts.length) {
+          grid.innerHTML = `<div class="card tile"><h3>No posts yet</h3><p class="muted">Once you publish your first post in /admin, it will show here.</p></div>`;
+          return;
+        }
+
+        const top3 = posts.slice(0, 3);
+        grid.innerHTML = top3.map((p, idx) => {
+          const title = escapeHtml(p.title || 'Untitled');
+          const date = escapeHtml(p.date || '');
+          const excerpt = escapeHtml(p.excerpt || '');
+          const link = '/blog/?post=' + encodeURIComponent(p.slug || p.title || ('post-' + idx));
+          return `
+            <div class="card tile">
+              <h3>${title}</h3>
+              <p class="muted" style="margin:6px 0 0;"><strong>${date}</strong></p>
+              <p class="muted" style="margin:10px 0 0;">${excerpt}</p>
+              <p class="muted" style="margin:12px 0 0; font-weight:800;"><a href="/blog/">Read more →</a></p>
+            </div>
+          `;
+        }).join('');
+      } catch (e) {
+        grid.innerHTML = `
+          <div class="card tile">
+            <h3>Blog preview error</h3>
+            <p class="muted">This does not break your site. It means the blog system is still being finalized.</p>
+            <p class="muted" style="margin-top:8px;"><b>${escapeHtml(e.message || String(e))}</b></p>
+            <p class="muted" style="margin-top:10px;">You can still view blog.json directly: <a href="/blog.json" style="text-decoration:underline;">/blog.json</a></p>
+          </div>
+        `;
+      }
+    }
+
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Run
+    loadBlogPreview();
   </script>
 </body>
 </html>
