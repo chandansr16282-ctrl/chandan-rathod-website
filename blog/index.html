@@ -5,15 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog | Real Estate With Chandan</title>
   <style>
-    body{margin:0;font-family:system-ui;background:#0b0f14;color:#e5e7eb}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0b0f14;color:#e5e7eb}
     .wrap{max-width:1100px;margin:0 auto;padding:24px}
     a{color:inherit}
     .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    .btn{padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;text-decoration:none;display:inline-block}
+    .btn{padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;text-decoration:none;display:inline-block;background:rgba(255,255,255,.04)}
+    .btn:hover{background:rgba(255,255,255,.07)}
     .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
     .card{border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:16px;background:rgba(255,255,255,.04)}
-    img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin-bottom:12px}
     .muted{color:#9ca3af;font-weight:600}
+    .title{font-weight:900;font-size:16px;line-height:1.2}
+    .meta{margin-top:6px}
+    img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin-bottom:12px}
+    details{margin-top:12px}
+    summary{cursor:pointer;font-weight:900}
+    .body{margin-top:10px;color:#cbd5e1;font-weight:550;line-height:1.7}
     @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)} img{height:170px}}
   </style>
 </head>
@@ -22,7 +28,7 @@
     <div class="top">
       <div>
         <h1 style="margin:0;">Blog</h1>
-        <div class="muted">Weekly tips, market updates, and guides for Vancouver & Surrey.</div>
+        <div class="muted">Weekly tips, market updates, and guides for Vancouver &amp; Surrey.</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a class="btn" href="/">← Home</a>
@@ -33,46 +39,109 @@
     <div class="grid" id="posts">
       <div class="card">
         <b>Loading…</b>
-        <div class="muted" style="margin-top:6px;">If this stays, refresh once.</div>
+        <div class="muted" style="margin-top:6px;">If this stays, we’ll show the exact error.</div>
       </div>
     </div>
   </div>
 
   <script>
-    const escapeHtml = (s) => String(s)
-      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
-      .replaceAll('"','&quot;').replaceAll("'","&#039;');
+    // Safe HTML escape (prevents broken layout if your blog text has < > etc.)
+    function escapeHtml(s){
+      s = String(s ?? "");
+      return s
+        .split("&").join("&amp;")
+        .split("<").join("&lt;")
+        .split(">").join("&gt;")
+        .split('"').join("&quot;")
+        .split("'").join("&#039;");
+    }
 
-    async function load(){
-      const el = document.getElementById('posts');
-      try{
-        const res = await fetch(new URL('/blog.json', window.location.origin), { cache: 'no-store' });
-        if(!res.ok) throw new Error('blog.json not found');
-        const data = await res.json();
-        const posts = (data.posts||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+    // Convert plain text newlines to <br> safely after escaping
+    function nl2brSafe(text){
+      return escapeHtml(text).replace(/\r?\n/g, "<br>");
+    }
 
-        if(!posts.length){
-          el.innerHTML = '<div class="card"><b>No posts yet</b><div class="muted" style="margin-top:6px;">Go to Admin Login and add your first post.</div></div>';
-          return;
+    // Try both locations so it works whether you open /blog/ or /blog/index.html
+    async function fetchBlogJson(){
+      const tries = ["/blog.json", "../blog.json"];
+      let lastErr = null;
+
+      for (const path of tries){
+        try{
+          const res = await fetch(path, { cache: "no-store" });
+          if (!res.ok) throw new Error(path + " returned " + res.status);
+          return await res.json();
+        }catch(e){
+          lastErr = e;
         }
+      }
+      throw lastErr || new Error("Could not load blog.json");
+    }
 
-        el.innerHTML = posts.map(p => `
+    function render(posts){
+      const el = document.getElementById("posts");
+      if (!el) return;
+
+      if (!posts || !posts.length){
+        el.innerHTML = `
+          <div class="card">
+            <b>No posts yet</b>
+            <div class="muted" style="margin-top:6px;">Go to Admin Login and add your first post.</div>
+          </div>`;
+        return;
+      }
+
+      el.innerHTML = posts.map(p => {
+        const title = escapeHtml(p.title || "");
+        const date = escapeHtml(String(p.date || "").slice(0,10));
+        const excerpt = p.excerpt ? `<div class="muted" style="margin-top:10px;">${escapeHtml(p.excerpt)}</div>` : "";
+        const image = p.image ? `<img src="${escapeHtml(p.image)}" alt="">` : "";
+        const body = p.body ? `<div class="body">${nl2brSafe(p.body)}</div>` : `<div class="muted" style="margin-top:10px;">(No body text yet)</div>`;
+
+        return `
           <article class="card">
-            ${p.image ? `<img src="${p.image}" alt="">` : ``}
-            <div style="font-weight:900;">${escapeHtml(p.title||'')}</div>
-            <div class="muted" style="margin-top:6px;">${(p.date||'').toString().slice(0,10)}</div>
-            ${p.excerpt ? `<div class="muted" style="margin-top:10px;">${escapeHtml(p.excerpt)}</div>` : ``}
-            <details style="margin-top:12px;">
-              <summary style="cursor:pointer;font-weight:900;">Read full post</summary>
-              <div class="muted" style="margin-top:10px;">${escapeHtml(p.body||'').replaceAll('\\n','<br>')}</div>
+            ${image}
+            <div class="title">${title}</div>
+            <div class="muted meta">${date}</div>
+            ${excerpt}
+            <details>
+              <summary>Read full post</summary>
+              ${body}
             </details>
           </article>
-        `).join('');
+        `;
+      }).join("");
+    }
+
+    async function init(){
+      const el = document.getElementById("posts");
+      try{
+        const data = await fetchBlogJson();
+        const posts = (data.posts || [])
+          .slice()
+          .sort((a,b) => String(b.date||"").localeCompare(String(a.date||"")));
+        render(posts);
       }catch(e){
-        el.innerHTML = '<div class="card"><b>Error loading posts</b><div class="muted" style="margin-top:6px;">blog.json opens, so this should fix after deploy. Refresh once.</div></div>';
+        // This ensures you NEVER get stuck on "Loading..." again.
+        el.innerHTML = `
+          <div class="card">
+            <b>Could not load blog posts</b>
+            <div class="muted" style="margin-top:6px;">
+              Error: ${escapeHtml(e && e.message ? e.message : String(e))}
+            </div>
+            <div class="muted" style="margin-top:10px;">
+              Fix: make sure <b>blog.json</b> exists at the repo root and is deployed.
+            </div>
+          </div>`;
       }
     }
-    load();
+
+    // Run after DOM is ready (extra-safe)
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
