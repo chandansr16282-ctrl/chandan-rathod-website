@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chandan Rathod | Vancouver & Surrey Realtor</title>
+  <meta name="description" content="Vancouver & Surrey Realtor. Buyer & seller guidance, neighbourhood insights, and a free home value estimate." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Chandan Rathod | Vancouver & Surrey Realtor" />
+  <meta property="og:description" content="Guidance for buying & selling in Vancouver and Surrey. Book a call or request a free home value estimate." />
+  <meta property="og:type" content="website" />
+
+  <!-- Minimal, modern styling (no external dependencies) -->
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111827;
+      --panel2: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --line: rgba(255,255,255,.08);
+      --accent: #22c55e;
+      --accent2: #60a5fa;
+      --warning: #fbbf24;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 20px;
+      --radius2: 14px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1000px 600px at 15% 0%, rgba(96,165,250,.18), transparent 50%),
+                  radial-gradient(900px 500px at 85% 10%, rgba(34,197,94,.16), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { opacity: .95; }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 18px; }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,20,.7);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(34,197,94,.25), rgba(96,165,250,.25));
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      font-weight: 800;
+    }
+    .navlinks {
+      display: none;
+      gap: 16px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .navlinks a { padding: 10px 10px; border-radius: 12px; }
+    .navlinks a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+
+    .actions { display: flex; align-items: center; gap: 10px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease;
+      user-select: none;
+    }
+    .btn:hover { background: rgba(255,255,255,.07); }
+    .btn:active { transform: translateY(1px); }
+
+    .btn.primary {
+      background: linear-gradient(135deg, rgba(34,197,94,.92), rgba(96,165,250,.9));
+      border: 0;
+      color: #07110a;
+    }
+    .btn.primary:hover { filter: brightness(1.02); }
+
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+    }
+
+    .hamburger {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    /* Mobile menu */
+    .mobile {
+      display: none;
+      padding: 0 0 14px 0;
+    }
+    .mobile.open { display: block; }
+    .mobile a {
+      display: block;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .mobile a:hover { background: rgba(255,255,255,.06); color: var(--text); border-color: rgba(255,255,255,.10); }
+
+    /* Hero */
+    .hero { padding: 44px 0 26px; }
+    .heroGrid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(17,24,39,.82), rgba(15,23,42,.6));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .heroLeft { padding: 26px; }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+    .kickerDot {
+      width: 8px; height: 8px; border-radius: 99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(34,197,94,.12);
+    }
+    h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(30px, 4.3vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+    }
+    .sub {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 16px;
+      max-width: 60ch;
+    }
+    .heroCtas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+    .miniRow { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 18px; }
+    .mini {
+      border-radius: var(--radius2);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .miniIcon {
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      display: grid; place-items: center;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      flex: 0 0 auto;
+    }
+    .mini h3 { margin: 0; font-size: 14px; }
+    .mini p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+
+    /* Lead card */
+    .heroRight { padding: 22px; }
+    .leadHeader { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .leadHeader h2 { margin: 0; font-size: 18px; letter-spacing: -0.2px; }
+    .pill {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b1220;
+      background: rgba(96,165,250,.95);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 14px 0 12px;
+    }
+    .tab {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .tab.active {
+      background: linear-gradient(135deg, rgba(34,197,94,.25), rgba(96,165,250,.22));
+      color: var(--text);
+      border-color: rgba(255,255,255,.16);
+    }
+
+    form { margin: 0; }
+    .grid2 { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    label { display: block; font-size: 12px; color: var(--muted); font-weight: 800; margin: 10px 0 6px; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(3,7,18,.35);
+      color: var(--text);
+      outline: none;
+      font-weight: 650;
+    }
+    textarea { min-height: 92px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: rgba(156,163,175,.9); font-weight: 650; }
+
+    .fineprint { margin: 10px 0 0; font-size: 12px; color: rgba(156,163,175,.95); }
+    .fineprint a { text-decoration: underline; text-underline-offset: 2px; }
+
+    .formActions { display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+    .success {
+      display: none;
+      margin-top: 12px;
+      border: 1px solid rgba(34,197,94,.25);
+      background: rgba(34,197,94,.10);
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: #d1fae5;
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    /* Sections */
+    section { padding: 26px 0; }
+    .sectionTitle {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .sectionTitle h2 { margin: 0; font-size: 22px; letter-spacing: -0.3px; }
+    .sectionTitle p { margin: 0; color: var(--muted); font-weight: 650; font-size: 14px; }
+
+    .grid3 { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .tile { padding: 18px; }
+    .tile h3 { margin: 0 0 6px; font-size: 16px; }
+    .tile p { margin: 0; color: var(--muted); font-weight: 600; font-size: 14px; }
+
+    .steps { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .step { padding: 18px; display: flex; gap: 12px; }
+    .num {
+      width: 36px; height: 36px; border-radius: 14px;
+      display: grid; place-items: center;
+      font-weight: 900;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      flex: 0 0 auto;
+      color: #dbeafe;
+    }
+
+    .quote { padding: 18px; }
+    blockquote { margin: 0; color: rgba(229,231,235,.98); font-weight: 700; font-size: 15px; }
+    .cite { margin-top: 8px; color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .faq { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    details {
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 14px 14px;
+    }
+    summary { cursor: pointer; font-weight: 800; }
+    details p { margin: 10px 0 0; color: var(--muted); font-weight: 600; }
+
+    /* Footer */
+    footer {
+      padding: 22px 0 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .footGrid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .footSmall { font-size: 12px; line-height: 1.6; }
+
+    /* Responsive */
+    @media (min-width: 880px) {
+      .navlinks { display: flex; }
+      .hamburger { display: none; }
+      .heroGrid { grid-template-columns: 1.35fr .85fr; }
+      .miniRow { grid-template-columns: 1fr 1fr; }
+      .grid2 { grid-template-columns: 1fr 1fr; }
+      .grid3 { grid-template-columns: 1fr 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .footGrid { grid-template-columns: 1.2fr .8fr; align-items: start; }
+    }
+
+    /* Utility */
+    .muted { color: var(--muted); }
+    .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Home">
+          <img src="data:image/jpeg;base64,939108" alt="Headshot" style="width:72px;height:72px;border-radius:80%;object-fit:cover;border:1px solid rgba(255,255,255,.25);" />
+          <div>
+            <div style="font-size:14px; line-height:1.15;">Chandan Rathod</div>
+            <div style="font-size:12px; color: var(--muted); font-weight:700;">Vancouver • Surrey Realtor</div>
+          </div>
+        </a>
+
+        <nav class="navlinks" aria-label="Site links">
+          <a href="#services">Services</a>
+          <a href="#neighbourhoods">Neighbourhoods</a>
+          <a href="#buyers">Buy</a>
+          <a href="#sellers">Sell</a>
+          <a href="#testimonials">Reviews</a>
+          <a href="#faq">FAQ</a>
+          <a href="#faq">Blog</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn ghost" href="tel:+17788872030" aria-label="Call">📞 Call</a>
+          <a class="btn primary" href="#contact" aria-label="Book a call">📅 Book a Call</a>
+          <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+            <span aria-hidden="true">☰</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile" id="mobileMenu" aria-label="Mobile menu">
+        <a href="#services">Services</a>
+        <a href="#neighbourhoods">Neighbourhoods</a>
+        <a href="#buyers">Buy</a>
+        <a href="#sellers">Sell</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#faq">Blog</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="heroGrid">
+          <div class="card heroLeft">
+            <div class="kicker"><span class="kickerDot"></span> Lower Mainland Real Estate • Clear, calm guidance</div>
+            <h1>Buy or sell with a plan — not guesswork.</h1>
+            <p class="sub">I help buyers and sellers in <strong>Vancouver</strong> and <strong>Surrey</strong> make confident decisions with smart pricing, clean negotiation, and step-by-step support from offer to keys.</p>
+
+            <div class="heroCtas">
+              <a class="btn primary" href="#contact">📅 Book a Free Consultation</a>
+              <a class="btn" href="#contact" onclick="window.__setLeadTab && window.__setLeadTab('value')">🏠 Get a Free Home Value</a>
+              <a class="btn" href="#services">✨ See How I Help</a>
+            </div>
+
+            <div class="miniRow" style="margin-top:18px;">
+              <div class="mini">
+                <div class="miniIcon" aria-hidden="true">🧭</div>
+                <div>
+                  <h3>Strategy first</h3>
+                  <p>Pricing + positioning + negotiation — tailored to your property and timeline.</p>
+                </div>
+              </div>
+              <div class="mini">
+                <div class="miniIcon" aria-hidden="true">🧾</div>
+                <div>
+                  <h3>Step-by-step</h3>
+                  <p>Plain-English walkthroughs of offers, subjects, strata docs, and closing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card heroRight" id="contact">
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+              <img src="headshot.jpg" alt="Chandan Rathod – Realtor" style="width:120px;height:120px;border-radius:80%;object-fit:cover;border:2px solid rgba(255,255,255,.25);" />
+              <div>
+                <div style="font-weight:900;font-size:16px;">Chandan Rathod</div>
+                <div class="muted" style="font-weight:700;font-size:13px;">Sutton Realtor · Vancouver & Surrey</div>
+              </div>
+            </div>
+            <div class="leadHeader">
+              <h2>Get help fast</h2>
+              <div class="pill">Response in 24h</div>
+            </div>
+            <p class="muted" style="margin:10px 0 0; font-weight:650;">Choose what you need. This takes ~30 seconds.</p>
+
+            <div class="tabs" role="tablist" aria-label="Lead form tabs">
+              <div class="tab active" id="tab-call" role="tab" aria-selected="true" tabindex="0">📅 Book a Call</div>
+              <div class="tab" id="tab-value" role="tab" aria-selected="false" tabindex="0">🏠 Home Value</div>
+            </div>
+
+            <!-- NOTE: This form is currently set up for a no-backend demo.
+                 Replace action with Formspree / your CRM endpoint (examples below in comments).
+            -->
+            <form id="leadForm" novalidate>
+              <input type="hidden" name="leadType" id="leadType" value="call" />
+
+              <div class="grid2">
+                <div>
+                  <label for="name">Full name</label>
+                  <input id="name" name="name" placeholder="Your name" autocomplete="name" required />
+                </div>
+                <div>
+                  <label for="phone">Phone</label>
+                  <input id="phone" name="phone" placeholder="(604) 123-4567" autocomplete="tel" required />
+                </div>
+              </div>
+
+              <label for="email">Email</label>
+              <input id="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+
+              <div id="callFields">
+                <div class="grid2">
+                  <div>
+                    <label for="timeframe">When are you moving?</label>
+                    <select id="timeframe" name="timeframe">
+                      <option value="">Select</option>
+                      <option>ASAP (0–30 days)</option>
+                      <option>1–3 months</option>
+                      <option>3–6 months</option>
+                      <option>6+ months</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="area">Preferred area</label>
+                    <select id="area" name="area">
+                      <option value="">Select</option>
+                      <option>Vancouver</option>
+                      <option>Surrey</option>
+                      <option>Burnaby</option>
+                      <option>Richmond</option>
+                      <option>Coquitlam / Port Coquitlam</option>
+                      <option>Langley</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div id="valueFields" style="display:none;">
+                <label for="address">Property address (or nearest intersection)</label>
+                <input id="address" name="address" placeholder="123 Main St, Surrey" />
+
+                <div class="grid2">
+                  <div>
+                    <label for="propertyType">Property type</label>
+                    <select id="propertyType" name="propertyType">
+                      <option value="">Select</option>
+                      <option>Condo</option>
+                      <option>Townhome</option>
+                      <option>Detached</option>
+                      <option>Duplex</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="bed">Beds</label>
+                    <select id="bed" name="bed">
+                      <option value="">Select</option>
+                      <option>Studio</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4+</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <label for="message">Anything I should know?</label>
+              <textarea id="message" name="message" placeholder="Budget, must-haves, timeline, or your property details..."></textarea>
+
+              <div class="formActions">
+                <button class="btn primary" type="submit">Send</button>
+                <a class="btn" href="mailto:chandanr@sutton.com?subject=Real%20Estate%20Inquiry%20(Vancouver%20%2F%20Surrey)">Email Instead</a>
+              </div>
+
+              <p class="fineprint">By submitting, you agree I may contact you about your request. No spam. <a href="#disclaimer">View disclaimer</a>.</p>
+              <div class="success" id="successMsg">✅ Got it — I’ll reach out shortly. (Demo mode: this form doesn’t send yet. See the setup note below.)</div>
+
+              <!--
+                QUICK SETUP (recommended)
+                1) Formspree: create a form and replace the JS below to POST to your endpoint.
+                   Example endpoint: https://formspree.io/f/xxxxabcd
+
+                2) CRM: replace fetch() URL with your CRM webhook (Follow Up Boss, LionDesk, HubSpot, etc.)
+
+                3) EmailJS (client-side email): works without a server but requires EmailJS setup.
+              -->
+            </form>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>How I help</h2>
+            <p>Clear advice. Strong execution. Less stress.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card tile">
+            <h3>Buyer strategy</h3>
+            <p>Pre-approval + search plan + offer strategy, including subjects, strata review, and closing steps.</p>
+          </div>
+          <div class="card tile">
+            <h3>Seller pricing + marketing</h3>
+            <p>Pricing that matches the market, professional presentation, and negotiation that protects your net.</p>
+          </div>
+          <div class="card tile">
+            <h3>Offer presentation</h3>
+            <p>A clean, professional offer package that builds trust and reduces back-and-forth (timelines, terms, docs).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEIGHBOURHOODS -->
+    <section id="neighbourhoods">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>Neighbourhood snapshots</h2>
+            <p>Quick guides — I can expand these into full pages later.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card tile">
+            <h3>Vancouver</h3>
+            <p>Walkability, transit access, school catchments, and condo vs. freehold trade-offs.</p>
+          </div>
+          <div class="card tile">
+            <h3>Surrey</h3>
+            <p>Growth pockets, family-friendly areas, and what to watch in strata documents.</p>
+          </div>
+          <div class="card tile">
+            <h3>Lower Mainland</h3>
+            <p>Comparisons across Burnaby, Richmond, Coquitlam, Langley — based on your budget & lifestyle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUYERS -->
+    <section id="buyers">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>Buying process</h2>
+            <p>From first call to keys — simplified.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="card step">
+            <div class="num">1</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Plan + pre-approval</h3>
+              <p class="muted" style="margin:0; font-weight:600;">We align on budget, timeline, and must-haves. You’ll get lender clarity so offers are strong.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">2</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Search + shortlist</h3>
+              <p class="muted" style="margin:0; font-weight:600;">I set up a targeted search, explain comps, and help you move quickly on the right homes.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">3</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Offer + conditions</h3>
+              <p class="muted" style="margin:0; font-weight:600;">Offer terms, deposit, subjects, inclusions — we keep it clean and buyer-protective.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">4</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Subject removal + closing</h3>
+              <p class="muted" style="margin:0; font-weight:600;">Inspections, strata docs (if applicable), financing, appraisal, and final walkthrough to completion day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELLERS -->
+    <section id="sellers">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>Selling process</h2>
+            <p>Presentation + pricing + negotiation that protects your outcome.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="card step">
+            <div class="num">1</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Pricing strategy</h3>
+              <p class="muted" style="margin:0; font-weight:600;">We review comparable sales, current competition, and your ideal timeline to set the right list price.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">2</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Prep + marketing</h3>
+              <p class="muted" style="margin:0; font-weight:600;">Staging guidance, pro photos, listing copy, and a showing plan designed to maximize offers.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">3</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Offers + negotiation</h3>
+              <p class="muted" style="margin:0; font-weight:600;">Clean presentation to the buyer side, counter strategy, and risk control on subjects and dates.</p>
+            </div>
+          </div>
+          <div class="card step">
+            <div class="num">4</div>
+            <div>
+              <h3 style="margin:0 0 6px;">Completion + possession</h3>
+              <p class="muted" style="margin:0; font-weight:600;">Coordinating with lawyers/notaries, timelines, keys, and making sure nothing falls through the cracks.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>What clients say</h2>
+            <p>Replace these with your real reviews when ready.</p>
+          </div>
+        </div>
+
+        <div class="grid3">
+          <div class="card quote">
+            <blockquote>“We felt calm the whole time. Every step was explained clearly, and the offer strategy worked.”</blockquote>
+            <div class="cite">— Buyer, Surrey</div>
+          </div>
+          <div class="card quote">
+            <blockquote>“Professional marketing and strong negotiation. We sold with clean terms and the timeline we wanted.”</blockquote>
+            <div class="cite">— Seller, Vancouver</div>
+          </div>
+          <div class="card quote">
+            <blockquote>“Fast responses, honest advice, no pressure. Exactly what we needed as first-time buyers.”</blockquote>
+            <div class="cite">— First-time buyer, Lower Mainland</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <div class="sectionTitle">
+          <div>
+            <h2>FAQ</h2>
+            <p>Quick answers buyers & sellers ask most.</p>
+          </div>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Do you work with first-time buyers?</summary>
+            <p>Yes. I’ll walk you through the full process (pre-approval, offers, conditions, strata docs, closing) in plain English.</p>
+          </details>
+          <details>
+            <summary>Can you help me understand strata documents?</summary>
+            <p>Absolutely. I’ll show you what to look for and what questions to ask, and suggest when to seek legal/accounting advice where needed.</p>
+          </details>
+          <details>
+            <summary>How do you determine list price?</summary>
+            <p>Comparable sales, active competition, your property’s condition/features, and your timeline. We choose a strategy aligned with today’s market.</p>
+          </details>
+          <details>
+            <summary>How do I start?</summary>
+            <p>Click “Book a Free Consultation” and tell me your timeline. I’ll respond within 24 hours with next steps.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <div class="sectionTitle">
+      <div>
+        <h2>Blog</h2>
+        <p>Weekly real estate updates, tips, and guides.</p>
+      </div>
+    </div>
+
+    <div class="grid3" id="blogGrid"></div>
+
+    <div class="card" style="padding:16px; margin-top:12px;">
+      <div class="muted" style="font-weight:650; font-size:13px;">
+        To add a new post: open <b>index.html</b> → search for <b>posts =</b> → add a new item at the top → save → upload to Netlify.
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- CONTACT STRIP -->
+    <section aria-label="Contact strip">
+      <div class="container">
+        <div class="card" style="padding:20px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+          <div>
+            <div style="font-weight:900; font-size:18px; letter-spacing:-.2px;">Ready to talk?</div>
+            <div class="muted" style="font-weight:650;">Tell me your goal and I’ll send a clear plan.</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="#contact">📅 Book a Call</a>
+            <a class="btn" href="tel:+17788872030">📞 Call Now</a>
+            <a class="btn" href="sms:+17788872030">💬 Text</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCLAIMER -->
+    <section id="disclaimer" aria-label="Disclaimer">
+      <div class="container">
+        <div class="card" style="padding:18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <div aria-hidden="true" style="width:38px; height:38px; border-radius:14px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.10); background: rgba(251,191,36,.10);">⚠️</div>
+            <div>
+              <h2 style="margin:0 0 6px; font-size:18px;">Friendly disclaimer</h2>
+              <p class="muted" style="margin:0; font-weight:600;">
+                This website provides general real estate information only and is not legal, tax, or financial advice.
+                Market conditions can change quickly and all information should be independently verified.
+                For advice specific to your situation, consult appropriate professionals (lawyer/notary, mortgage broker/lender, accountant).
+                Any service is offered subject to applicable laws and professional rules in British Columbia.
+              </p>
+              <p class="muted" style="margin:10px 0 0; font-weight:600;">
+                Brokerage disclosure: <strong>Replace this line with your brokerage name</strong> and required disclosures.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footGrid">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <img src="data:image/jpeg;base64,{{B64}}" alt="Headshot" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.25);" />
+            <div>
+              <div style="font-weight:900;">Chandan Rathod</div>
+              <div class="footSmall">Vancouver • Surrey • Lower Mainland</div>
+            </div>
+          </div>
+          <p class="footSmall" style="margin-top:10px;">
+            Phone: <a href="tel:+17788872030" style="text-decoration:underline; text-underline-offset:2px;">+1 778-887-2030</a>
+            &nbsp;•&nbsp;
+            Email: <a href="mailto:chandanr@sutton.com" style="text-decoration:underline; text-underline-offset:2px;">chandanr@sutton.com</a>
+          </p>
+          <p class="footSmall" style="margin:0;">© <span id="year"></span> Chandan Rathod. All rights reserved.</p>
+        </div>
+        <div>
+          <p class="footSmall" style="margin:0 0 8px; font-weight:800;">Quick links</p>
+          <p class="footSmall" style="margin:0;">
+            <a href="#services" style="text-decoration:underline; text-underline-offset:2px;">Services</a> ·
+            <a href="#buyers" style="text-decoration:underline; text-underline-offset:2px;">Buy</a> ·
+            <a href="#sellers" style="text-decoration:underline; text-underline-offset:2px;">Sell</a> ·
+            <a href="#contact" style="text-decoration:underline; text-underline-offset:2px;">Contact</a>
+          </p>
+          <p class="footSmall" style="margin-top:10px;">
+            Social: <a href="#" style="text-decoration:underline; text-underline-offset:2px;">Instagram</a> ·
+            <a href="#" style="text-decoration:underline; text-underline-offset:2px;">YouTube</a> ·
+            <a href="#" style="text-decoration:underline; text-underline-offset:2px;">LinkedIn</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+// BLOG POSTS (add a new post weekly by adding an item at the TOP)
+const posts = [
+  {
+    title: "Market Update: What’s happening in Vancouver & Surrey this week",
+    date: "Feb 2026",
+    excerpt: "A quick snapshot of pricing, demand, and what it means if you’re buying or selling.",
+    content: "Write your full blog post here. You can use plain text. Keep paragraphs short for readability."
+  },
+  {
+    title: "Buyer Tip: 5 things to check before writing an offer",
+    date: "Feb 2026",
+    excerpt: "The small details that save money and avoid headaches later.",
+    content: "Write your full blog post here..."
+  }
+];
+
+function renderBlog() {
+  const grid = document.getElementById('blogGrid');
+  if (!grid) return;
+
+  grid.innerHTML = posts.map((p, i) => `
+    <div class="card tile" style="cursor:pointer;" onclick="openPost(${i})">
+      <h3>${p.title}</h3>
+      <p class="muted" style="margin-top:6px;"><strong>${p.date}</strong></p>
+      <p style="margin-top:8px;" class="muted">${p.excerpt}</p>
+      <p class="muted" style="margin-top:10px; font-weight:800;">Read more →</p>
+    </div>
+  `).join('');
+}
+
+function openPost(i) {
+  const p = posts[i];
+  alert(p.title + "\\n\\n" + p.content);
+}
+
+renderBlog();
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+    // Close mobile menu after clicking a link
+    mobileMenu?.querySelectorAll('a')?.forEach(a => a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Tabs: Call vs Home Value
+    const tabCall = document.getElementById('tab-call');
+    const tabValue = document.getElementById('tab-value');
+    const callFields = document.getElementById('callFields');
+    const valueFields = document.getElementById('valueFields');
+    const leadType = document.getElementById('leadType');
+
+    function setTab(which) {
+      const isCall = which === 'call';
+      tabCall.classList.toggle('active', isCall);
+      tabValue.classList.toggle('active', !isCall);
+      tabCall.setAttribute('aria-selected', String(isCall));
+      tabValue.setAttribute('aria-selected', String(!isCall));
+      callFields.style.display = isCall ? '' : 'none';
+      valueFields.style.display = isCall ? 'none' : '';
+      leadType.value = which;
+    }
+
+    window.__setLeadTab = setTab;
+
+    tabCall?.addEventListener('click', () => setTab('call'));
+    tabValue?.addEventListener('click', () => setTab('value'));
+    tabCall?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('call'); });
+    tabValue?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('value'); });
+
+    // Demo form submission (no backend). Replace with fetch() to Formspree/CRM.
+    const form = document.getElementById('leadForm');
+    const successMsg = document.getElementById('successMsg');
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const name = String(data.get('name') || '').trim();
+      const phone = String(data.get('phone') || '').trim();
+      const email = String(data.get('email') || '').trim();
+
+      if (!name || !phone || !email || !validateEmail(email)) {
+        alert('Please enter your name, phone, and a valid email.');
+        return;
+      }
+
+      // ✅ OPTION 1: Formspree (uncomment and replace URL)
+      // try {
+      //   const res = await fetch('https://formspree.io/f/xxxxabcd', {
+      //     method: 'POST',
+      //     body: data,
+      //     headers: { 'Accept': 'application/json' }
+      //   });
+      //   if (!res.ok) throw new Error('Form submit failed');
+      // } catch (err) {
+      //   alert('Sorry — something went wrong. Please email instead.');
+      //   return;
+      // }
+
+      // ✅ OPTION 2: CRM webhook (example)
+      // await fetch('https://your-crm-webhook-url', { method:'POST', body: JSON.stringify(Object.fromEntries(data)), headers:{'Content-Type':'application/json'} });
+
+      // Demo success
+      successMsg.style.display = 'block';
+      form.reset();
+      // Keep tab state
+      setTab(leadType.value || 'call');
+    });
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
