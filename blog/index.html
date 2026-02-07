@@ -1,1 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog | Real Estate With Chandan</title>
+  <style>
+    body{margin:0;font-family:system-ui;background:#0b0f14;color:#e5e7eb}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px}
+    a{color:inherit}
+    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .btn{padding:10px 14px;border:1px solid rgba(255,255,255,.12);border-radius:999px;text-decoration:none;display:inline-block}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+    .card{border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:16px;background:rgba(255,255,255,.04)}
+    img{width:100%;height:200px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,.10);margin-bottom:12px}
+    .muted{color:#9ca3af;font-weight:600}
+    @media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)} img{height:170px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1 style="margin:0;">Blog</h1>
+        <div class="muted">Weekly tips, market updates, and guides for Vancouver & Surrey.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn" href="/">← Home</a>
+        <a class="btn" href="/admin/" target="_blank" rel="noopener">Admin Login</a>
+      </div>
+    </div>
 
+    <div class="grid" id="posts">
+      <div class="card">
+        <b>Loading…</b>
+        <div class="muted" style="margin-top:6px;">If this stays, refresh once.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const escapeHtml = (s) => String(s)
+      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+      .replaceAll('"','&quot;').replaceAll("'","&#039;');
+
+    async function load(){
+      const el = document.getElementById('posts');
+      try{
+        const res = await fetch('/blog.json', { cache:'no-store' });
+        if(!res.ok) throw new Error('blog.json not found');
+        const data = await res.json();
+        const posts = (data.posts||[]).slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+
+        if(!posts.length){
+          el.innerHTML = '<div class="card"><b>No posts yet</b><div class="muted" style="margin-top:6px;">Go to Admin Login and add your first post.</div></div>';
+          return;
+        }
+
+        el.innerHTML = posts.map(p => `
+          <article class="card">
+            ${p.image ? `<img src="${p.image}" alt="">` : ``}
+            <div style="font-weight:900;">${escapeHtml(p.title||'')}</div>
+            <div class="muted" style="margin-top:6px;">${(p.date||'').toString().slice(0,10)}</div>
+            ${p.excerpt ? `<div class="muted" style="margin-top:10px;">${escapeHtml(p.excerpt)}</div>` : ``}
+            <details style="margin-top:12px;">
+              <summary style="cursor:pointer;font-weight:900;">Read full post</summary>
+              <div class="muted" style="margin-top:10px;">${escapeHtml(p.body||'').replaceAll('\\n','<br>')}</div>
+            </details>
+          </article>
+        `).join('');
+      }catch(e){
+        el.innerHTML = '<div class="card"><b>Error loading posts</b><div class="muted" style="margin-top:6px;">blog.json opens, so this should fix after deploy. Refresh once.</div></div>';
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
