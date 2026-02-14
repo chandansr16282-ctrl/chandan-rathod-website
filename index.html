@@ -863,30 +863,61 @@
     tabCall?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('call'); });
     tabValue?.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setTab('value'); });
 
-    // ========= Demo form submission =========
-    const form = document.getElementById('leadForm');
-    const successMsg = document.getElementById('successMsg');
+    <script>
+  // ========= HubSpot form submission (Option C via Netlify Function) =========
+  const form = document.getElementById('leadForm');
+  const successMsg = document.getElementById('successMsg');
 
-    function validateEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    const payload = {
+      leadType: String(data.get('leadType') || 'call'),
+      name: String(data.get('name') || '').trim(),
+      phone: String(data.get('phone') || '').trim(),
+      email: String(data.get('email') || '').trim(),
+      timeframe: String(data.get('timeframe') || '').trim(),
+      area: String(data.get('area') || '').trim(),
+      address: String(data.get('address') || '').trim(),
+      propertyType: String(data.get('propertyType') || '').trim(),
+      bed: String(data.get('bed') || '').trim(),
+      message: String(data.get('message') || '').trim(),
+      pageUrl: window.location.href
+    };
+
+    if (!payload.name || !payload.phone || !payload.email || !validateEmail(payload.email)) {
+      alert('Please enter your name, phone, and a valid email.');
+      return;
     }
 
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const name = String(data.get('name') || '').trim();
-      const phone = String(data.get('phone') || '').trim();
-      const email = String(data.get('email') || '').trim();
+    try {
+      const res = await fetch('/.netlify/functions/hubspot-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-      if (!name || !phone || !email || !validateEmail(email)) {
-        alert('Please enter your name, phone, and a valid email.');
-        return;
-      }
+      if (!res.ok) throw new Error('Failed to send lead');
 
       successMsg.style.display = 'block';
       form.reset();
-      setTab(leadType.value || 'call');
-    });
+      // keep current tab after reset
+      setTab(payload.leadType || 'call');
+    } catch (err) {
+      alert('Sorry — something went wrong. Please try again or email instead.');
+      console.error(err);
+    }
+  });
+
+  // Footer year (keep yours if already present)
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
     // ========= Blog preview (homepage) =========
     function escapeHtml(str) {
@@ -958,3 +989,4 @@
 </script>
 </body>
 </html>
+
